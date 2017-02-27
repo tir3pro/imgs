@@ -5,21 +5,25 @@ import './style.scss';
 import images from './store/store';
 import Navigation from './components/Navigation';
 import List from './components/List';
-
+import AddImage from './components/AddImage';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			images: this.props.initialData
+			images: this.props.initialData,
+			isAddingFormVisible: false
 		}
 
 		this.deleteImage = this.deleteImage.bind(this);
+		this.handleAdd = this.handleAdd.bind(this);
 	}
 
 	handleAdd() {
-		debugger;
+		this.setState({ 
+			isAddingFormVisible: !this.state.isAddingFormVisible
+		});
 	}
 
 	deleteImage(id) {
@@ -33,6 +37,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<Navigation onAdd={this.handleAdd}/>
+				<AddImage isVisible={this.state.isAddingFormVisible} />
 				<List images={this.state.images} handleDelete={this.deleteImage}/>
 			</div>
 		);

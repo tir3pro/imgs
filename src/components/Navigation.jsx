@@ -2,6 +2,8 @@ import React from 'react';
 
 import Button from './Button';
 
+import AddImage from './AddImage';
+
 class Navigation extends React.Component {
 	constructor(props) {
 		super(props)
