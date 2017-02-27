@@ -1,0 +1,49 @@
+$color: green;
+
+body {
+	background-color: $color;
+}
+
+.images {
+	display: flex;
+}
+
+.images__image-wrap {
+	position: relative;
+	margin: 20px;
+	
+	img {
+		width: 250px;
+	}
+
+	.button {
+		opacity: 0;
+		-webkit-transition: all 0.5s;
+     	-moz-transition: all 0.5s;
+     	-o-transition: all 0.5s;
+     	transition: all 0.5s;
+		position: absolute;
+		bottom: 20px;
+	    min-width: 75px;
+	    padding: 5px 10px;
+	    border: 1px solid #bbb;
+	    text-align: center;
+	    color: #000;
+	    font-weight: 600;
+	    font-family: monospace;
+	    cursor: pointer;
+		
+		&.edit {
+			right: 110px;
+		}
+		&.remove {
+			right: 20px
+		}
+	}
+
+	&:hover {
+		.button {
+			opacity: 1;
+		}
+	}
+}

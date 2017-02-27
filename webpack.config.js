@@ -20,15 +20,20 @@ module.exports = {
 				loaders: ['react-hot-loader', 'babel-loader']
 			},
 			{
-				test: /\.styl$/,
-				loaders: ['style-loader', 'css-loader', 'stylus-loader']
-			}
+				test: /\.scss$/,
+				loaders: ['style-loader', 'css-loader', 'sass-loader']
+			},
+			// {
+			// 	test: /\.jpg$/,
+			// 	loaders: ['url-loader'],
+			// 	query: {mimetype: "image/png"}
+			// }
 		]
 	},
 
 	devtool: 'eval-source-map',
 
 	resolve: {
-		extensions: ['.js', '.json', '.jsx', '.css']
+		extensions: ['.js', '.json', '.jsx', '.scss']
 	}
 };
