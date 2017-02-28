@@ -5,7 +5,7 @@ import './style.scss';
 import images from './store/store';
 import Navigation from './components/Navigation';
 import List from './components/List';
-import AddImage from './components/AddImage';
+import CreateImage from './components/CreateImage';
 
 class App extends React.Component {
 	constructor(props) {
@@ -16,29 +16,47 @@ class App extends React.Component {
 			isAddingFormVisible: false
 		}
 
-		this.deleteImage = this.deleteImage.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+		this.handleCreate = this.handleCreate.bind(this);
 	}
 
-	handleAdd() {
+	nextId() {
+		this._nextId = this._nextId || 5;
+		return String(this._nextId++);
+	}
+
+	handleCreate() {
 		this.setState({ 
 			isAddingFormVisible: !this.state.isAddingFormVisible
 		});
 	}
 
-	deleteImage(id) {
+	handleDelete(id) {
 		let images = this.state.images.filter(image => image.id != id);
 
 		this.setState({ images });
 	}
 
+	handleAdd(src) {
+		let id = this.nextId();
+		let image = {
+			id,
+			title: `Image ${id}`,
+			src
+		}
+
+		let images = [...this.state.images, image];
+
+		this.setState({ images });
+	}
 
 	render() {
 		return (
 			<div>
-				<Navigation onAdd={this.handleAdd}/>
-				<AddImage isVisible={this.state.isAddingFormVisible} />
-				<List images={this.state.images} handleDelete={this.deleteImage}/>
+				<Navigation onCreate={this.handleCreate}/>
+				<CreateImage isVisible={this.state.isAddingFormVisible} onAdd={this.handleAdd} images={images} />
+				<List images={this.state.images} onDelete={this.handleDelete} />
 			</div>
 		);
 	}

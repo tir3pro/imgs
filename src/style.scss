@@ -1,19 +1,15 @@
-$color: green;
-
-body {
-	background-color: $color;
-}
-
 .images {
-	display: flex;
+	/*display: flex;*/
+	padding: 20px;
 }
 
 .images__image-wrap {
 	position: relative;
-	margin: 20px;
-	
+	max-width: 500px;
+	margin: 0 auto;
+
 	img {
-		width: 250px;
+		width: 100%;
 	}
 
 	.button {
@@ -48,10 +44,40 @@ body {
 	}
 }
 
-.show {
+.create-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 0px;
+    color: #fff;
+    background-color: #5c5;
+    border: 2px solid #245024;
+    border-radius: 40px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+
+.image-adding {
+	position: fixed;
+	width: 500px;
+	height: 500px;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -250px;
+	background: #fff;
+	border: 1px solid #bbb;
+	z-index: 10;
+}
+
+.visible {
 	display: block;
 }
 
 .hidden {
 	display: none;
 }
+

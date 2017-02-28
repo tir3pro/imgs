@@ -7,14 +7,14 @@ function List(props) {
 	const images = props.images;
 
 	return (
-		<div className="images">
+		<div className="images row">
 			{images.map(image => 
 				<Image 
 					title={image.title}
 					id={image.id}
 					key={image.id}
 					src={image.src}
-					onDelete={props.handleDelete}
+					onDelete={props.onDelete}
 				/>)
 			}
 		</div>

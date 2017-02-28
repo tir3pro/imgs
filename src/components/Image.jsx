@@ -13,17 +13,16 @@ class Image extends React.Component {
 	}
 
 	handleEdit() {
-		console.log(111);
+		console.log('EDIT');
 	}
 
 	handleDelete(event, id) {
 		console.log(event)
-		console.log(id)
 	}
 
 	render() {
 		return (
-			<div className="images__image-wrap">
+			<div className="images__image-wrap col-xs-12 col-sm-6 col-md-3">
 				<p>{this.props.title}</p>
 				<img key={this.props.id} id={this.props.id} src={this.props.src} />
 				<Button className="button edit" onClick={this.handleEdit}>EDIT</Button>
