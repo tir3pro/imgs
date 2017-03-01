@@ -1,5 +1,5 @@
 module.exports = {
-	entry: './src/App.jsx',
+	entry: './src/index.jsx',
 
 	output: {
 		filename: 'bundle.js',
@@ -9,7 +9,8 @@ module.exports = {
 	devServer: {
 		inline: true,
 		contentBase: './public',
-		port: 3000
+		port: 3000,
+    historyApiFallback: true
 	},
 
 	module: {
@@ -23,11 +24,10 @@ module.exports = {
 				test: /\.scss$/,
 				loaders: ['style-loader', 'css-loader', 'sass-loader']
 			},
-			// {
-			// 	test: /\.jpg$/,
-			// 	loaders: ['url-loader'],
-			// 	query: {mimetype: "image/png"}
-			// }
+			{
+				test: /\.jpg$/,
+				loaders: ['url-loader']
+			}
 		]
 	},
 

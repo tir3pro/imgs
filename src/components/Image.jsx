@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 
 import Button from './Button';
 import images from '../store/store';
@@ -25,7 +26,9 @@ class Image extends React.Component {
 			<div className="images__image-wrap col-xs-12 col-sm-6 col-md-3">
 				<p>{this.props.title}</p>
 				<img key={this.props.id} id={this.props.id} src={this.props.src} />
-				<Button className="button edit" onClick={this.handleEdit}>EDIT</Button>
+				<Link to={`/edit-image/${this.props.id}`}>
+					<Button className="button edit" onClick={this.handleEdit}>EDIT</Button>
+				</Link>
 				<Button className="button remove" onClick={() => this.props.onDelete(this.props.id)}>REMOVE</Button>
 			</div>
 		)
