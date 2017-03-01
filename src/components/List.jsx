@@ -7,7 +7,7 @@ function List(props) {
 	const images = props.images;
 
 	return (
-		<div className="images row">
+		<div className="images">
 			{images.map(image => 
 				<Image 
 					title={image.title}

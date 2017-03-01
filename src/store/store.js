@@ -18,7 +18,7 @@ const images = [
 		id: '4',
 		title: 'Image 4',
 		src: require("url-loader?mimetype=image/jpg!./../../imgs/4.jpg")
-	},
+	}
 ];
 
 export default images;

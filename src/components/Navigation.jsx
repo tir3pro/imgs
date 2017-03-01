@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from './Button';
-import AddImage from './AddImage';
+import CreateImage from './CreateImage';
 
 class Navigation extends React.Component {
 	constructor(props) {
