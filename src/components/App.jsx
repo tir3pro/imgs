@@ -61,7 +61,8 @@ class App extends React.Component {
 								images,
 								tooltips: this.state.tooltips,
 								addTooltip: this.addTooltip,
-								onAdd: this.handleAdd
+								onAdd: this.handleAdd,
+								formState: this.params
 							}
 						)
 					)

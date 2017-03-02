@@ -1,3 +1,5 @@
+$fontFamily: monospace;
+
 .images {
 	/*display: flex;*/
 	padding: 20px;
@@ -7,9 +9,16 @@
 	position: relative;
 	max-width: 500px;
 	margin: 0 auto;
+	margin-top: 10px;
 
 	img {
 		width: 100%;
+	}
+
+	p {
+		text-transform: uppercase;
+		font-weight: 600;
+	    font-family: $fontFamily;
 	}
 
 	.button {
@@ -26,14 +35,14 @@
 	    text-align: center;
 	    color: #000;
 	    font-weight: 600;
-	    font-family: monospace;
+	    font-family: $fontFamily;
 	    cursor: pointer;
 		
 		&.edit {
-			right: 110px;
+			right: 125px;
 		}
 		&.remove {
-			right: 20px
+			right: 35px
 		}
 	}
 
@@ -49,7 +58,7 @@
     height: 80px;
     font-size: 60px;
     font-weight: bold;
-    line-height: 0px;
+    line-height: 50px;
     color: #fff;
     background-color: #5c5;
     border: 2px solid #245024;
@@ -61,7 +70,18 @@
     z-index: 20;
 }
 
-.image-adding {
+.image-adding__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    z-index: 25;
+}
+
+.image-adding__tooltip-form {
 	position: fixed;
 	width: 500px;
 	height: 500px;
@@ -71,7 +91,12 @@
 	margin-left: -250px;
 	background: #fff;
 	border: 1px solid #bbb;
-	z-index: 10;
+	z-index: 30;
+}
+
+button.close {
+	font-size: 45px;
+	margin-right: 8px;
 }
 
 .visible {
@@ -81,4 +106,3 @@
 .hidden {
 	display: none;
 }
-
