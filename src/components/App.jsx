@@ -17,6 +17,7 @@ class App extends React.Component {
 
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
+		this.addTooltip = this.addTooltip.bind(this);
 	}
 
 	nextId() {
@@ -41,6 +42,13 @@ class App extends React.Component {
 		let images = [...this.state.images, image];
 
 		this.setState({ images });
+	}
+
+	addTooltip(settings) {
+		this.setState({
+			tooltips: this.state.tooltips.push(settings)
+		});
+		console.log(this.state.tooltips[0]);
 	}
 
 	render() {

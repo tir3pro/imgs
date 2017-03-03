@@ -4,27 +4,30 @@ import { Link } from 'react-router';
 
 import Button from './Button';
 import Checkbox from './Checkbox';
-import Coordinate from './Coordinate';
-import Textarea from './Textarea';
+import TooltipForm from './TooltipForm';
 
-class CreateImage extends React.Component {
+class CreateEditImage extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			openedForm: 'create',
+			openedForm: this.props.params.state,
 			isTooltipFormShown: false,
+			isImageAdded: null,
+			errors: null,
 			tooltip: {
-				x: '',
+				x: 0,
 				y: 0,
 				text: ''
 			}
 		};
 
 		this.toggleTooltip = this.toggleTooltip.bind(this);
-		this.handleCoordinates = this.handleCoordinates.bind(this);
-		this.handleText = this.handleText.bind(this);
+		this.handleTooltipForm = this.handleTooltipForm.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleAddImage = this.handleAddImage.bind(this);
+		this._choseImage = this._choseImage.bind(this);
+		this.handleErrors = this.handleErrors.bind(this);
 	}
 
 	_choseImage() {
@@ -43,26 +46,54 @@ class CreateImage extends React.Component {
 		});	
 	}
 
-	handleCoordinates(coordinates) {
+	handleTooltipForm(data) {
 		this.setState({
-			tooltip: Object.assign({}, this.state.tooltip, coordinates)
+			tooltip: Object.assign({}, this.state.tooltip, data)
 		});
 	}
 
-	handleText(text) {
+	handleAddImage() {
+		this._choseImage();
+
 		this.setState({
-			tooltip: Object.assign({}, this.state.tooltip, text)
+			isImageAdded: true
 		});
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-		
 		let src = this._choseImage();
-		this.props.onAdd(src);
+		let isImageAdded = this.state.isImageAdded;
+		
+		if (isImageAdded && !this.state.isTooltipFormShown) {
+			this.props.onAdd(src);
+		} else if (isImageAdded && this.state.isTooltipFormShown) {
+
+		} else {
+			this.setState({
+				isImageAdded: false
+			});
+		}
+
+		// if (this.state.errors === null) {
+		// 	this.setState({errors: true});
+		// }
+
+		/*adding tooltip*/
+		let tooltipSettings = this.state.tooltip;
+		this.props.addTooltip(tooltipSettings);
+	}
+
+	handleErrors(data) {
+		console.log('data: ', data);
+		this.setState({
+			errors: data
+		});
 	}
 
 	render() {
+		let isImageAdded = this.state.isImageAdded;
+
 		return (
 			<div className="image-adding">
 				<div className="image-adding__overlay"></div>
@@ -75,18 +106,23 @@ class CreateImage extends React.Component {
 
 					<div className="add-image">
 						<p>Please add a new image</p>
-						<button type="button" className="btn btn-primary">Add image</button>
+						<button type="button" className="btn btn-primary" onClick={this.handleAddImage} >Add image</button>
+						{
+							isImageAdded || isImageAdded === null ? '' :
+							<div className="alert alert-danger">
+								<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+							</div>
+						}
+						{
+							isImageAdded ? <p className="add-image__added">Image added!</p> : ''
+						}
 					</div>
 
 					<Checkbox onChange={this.toggleTooltip} />
 
-					{ !this.state.isTooltipFormShown ? '' : 
-						<div className="tooltip-container">
-							<p>Please add tooltip coordinates and its text</p>
-							<Coordinate coordinate="x" isErrorMessageShown={this.state.isErrorMessageShown} onCheck={this.handleCoordinates} />
-							<Coordinate coordinate="y" isErrorMessageShown={this.state.isErrorMessageShown} onCheck={this.handleCoordinates} />
-							<Textarea onCheck={this.handleText} />
-						</div>
+					{ 
+						!this.state.isTooltipFormShown ? '' : 
+							<TooltipForm onUpdateForm={this.handleTooltipForm} checkErrors={this.handleErrors} />
 					}
 
 					<div className="submit-btn">
@@ -100,4 +136,4 @@ class CreateImage extends React.Component {
 	}
 }
 
-export default CreateImage;
+export default CreateEditImage;

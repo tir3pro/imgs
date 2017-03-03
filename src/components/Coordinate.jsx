@@ -14,24 +14,26 @@ class Coordinate extends React.Component {
 		this.handleErrors = this.handleErrors.bind(this);
 	}
 
-	handleErrors(value) {
+	handleErrors(value, cb) {
 		this.setState({
 			isErrorMessageShown: !Boolean(value.match(/^[0-9]*$/) && Number(value) < 200)
-		});
+		}, cb);
 	}
 
 	handleChange() {
 		let value = this.refs[this.coordinate].value;
 
-		this.handleErrors(value);
-		this.props.onCheck({[this.coordinate]: value});
+		this.handleErrors(value, () => {
+			this.props.onError({[this.coordinate]: this.state.isErrorMessageShown});
+			this.props.onCheck({[this.coordinate]: value});
+		});
 	}
 
 	render() {
 		return (
 			<div className="form-group">
 			 	<label htmlFor={`coord-${this.coordinate}`}>{`Setup ${this.coordinate}-coordinate`}</label>
-			    <input type="text" ref={this.coordinate} className="form-control" id={`coord-${this.coordinate}`} onChange={this.handleChange}/>
+			    <input type="text" ref={this.coordinate} className="form-control" id={`coord-${this.coordinate}`} onChange={this.handleChange} />
 			    {
 			    	!this.state.isErrorMessageShown ? '' 
 			    	: 
@@ -47,7 +49,8 @@ class Coordinate extends React.Component {
 React.propTypes = {
 	coordinate: React.PropTypes.func.isRequired,
 	isErrorMessageShown: React.PropTypes.bool.isRequired,
-	onCheck: React.PropTypes.func.isRequired
+	onCheck: React.PropTypes.func.isRequired,
+	onError: React.PropTypes.func.isRequired
 }
 
 export default Coordinate;
