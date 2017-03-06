@@ -1,43 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class Textarea extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			isErrorMessageShown: false
-		};
-
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleErrors(value, cb) {
-		this.setState({
-			isErrorMessageShown: !Boolean(value || value.length > 200)
-		}, cb);
-	}
-
-	handleChange() {
-		let text = this.refs.text.value;
-
-		this.handleErrors(text, () => {
-			this.props.onError({text: this.state.isErrorMessageShown});
-			this.props.onCheck({text});
-		});
-	}
-
 	render() {
 		return (
 			<div className="form-group">
 				<label htmlFor="message">Add your text:</label>
-				<textarea className="form-control" rows="5" id="message" ref="text" onChange={this.handleChange}></textarea>
+				<textarea className="form-control" rows="5" onChange={this.props.onCheck} value={this.props.value}></textarea>
 				{
-			    	!this.state.isErrorMessageShown ? '' 
-			    	: 
+		      this.props.error ?
 				    <div className="alert alert-danger">
-						<strong>Add tooltip text, please</strong>
-					</div>
+						<strong>{ this.props.error.message }</strong>
+					</div> :
+				    null
 				} 
 			</div>
 		);
@@ -46,6 +20,6 @@ class Textarea extends React.Component {
 
 React.propTypes = {
 	onCheck: React.PropTypes.func.isRequired
-}
+};
 
 export default Textarea;

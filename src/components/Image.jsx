@@ -7,21 +7,6 @@ import Tooltip from './Tooltip';
 import images from '../store/store';
 
 class Image extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.handleEdit = this.handleEdit.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
-	}
-
-	handleEdit() {
-		console.log('EDIT');
-	}
-
-	handleDelete(event, id) {
-		console.log(event)
-	}
-
 	render() {
 		return (
 			<div className="images__image-wrap col-xs-12 col-sm-6 col-md-3">

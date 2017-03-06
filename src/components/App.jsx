@@ -30,7 +30,6 @@ class App extends React.Component {
 	}
 
 	handleAddImage(src, tooltip) {
-		debugger;
 		let id = this.nextId();
 		let image = {
 			id,
@@ -59,7 +58,7 @@ class App extends React.Component {
 							{},
 							this.props,
 							{
-								images,
+								images: this.state.images,
 								onAdd: this.handleAddImage,
 								formState: this.params
 							}
