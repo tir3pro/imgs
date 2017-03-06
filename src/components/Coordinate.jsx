@@ -32,13 +32,12 @@ class Coordinate extends React.Component {
 	render() {
 		return (
 			<div className="form-group">
-			 	<label htmlFor={`coord-${this.coordinate}`}>{`Setup ${this.coordinate}-coordinate`}</label>
-			    <input type="text" ref={this.coordinate} className="form-control" id={`coord-${this.coordinate}`} onChange={this.handleChange} />
+			    <input type="text" ref={this.coordinate} className="form-control" id={`coord-${this.coordinate}`} placeholder={`Setup ${this.coordinate}-coordinate`} onChange={this.handleChange} />
 			    {
 			    	!this.state.isErrorMessageShown ? '' 
 			    	: 
 				    <div className="alert alert-danger">
-						<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+						<strong>Set a tootlip coordinate, please</strong>
 					</div>
 				} 
 			</div>

@@ -12,12 +12,10 @@ class App extends React.Component {
 
 		this.state = {
 			images,
-			tooltips: []
 		};
 
-		this.handleAdd = this.handleAdd.bind(this);
+		this.handleAddImage = this.handleAddImage.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
-		this.addTooltip = this.addTooltip.bind(this);
 	}
 
 	nextId() {
@@ -31,24 +29,19 @@ class App extends React.Component {
 		this.setState({ images });
 	}
 
-	handleAdd(src) {
+	handleAddImage(src, tooltip) {
+		debugger;
 		let id = this.nextId();
 		let image = {
 			id,
 			title: `Image ${id}`,
-			src
+			src,
+			tooltip
 		};
 
 		let images = [...this.state.images, image];
 
 		this.setState({ images });
-	}
-
-	addTooltip(settings) {
-		this.setState({
-			tooltips: this.state.tooltips.push(settings)
-		});
-		console.log(this.state.tooltips[0]);
 	}
 
 	render() {
@@ -67,9 +60,7 @@ class App extends React.Component {
 							this.props,
 							{
 								images,
-								tooltips: this.state.tooltips,
-								addTooltip: this.addTooltip,
-								onAdd: this.handleAdd,
+								onAdd: this.handleAddImage,
 								formState: this.params
 							}
 						)

@@ -6,6 +6,8 @@ import Image from './Image';
 function List(props) {
 	const images = props.images;
 
+	console.log(images)
+
 	return (
 		<div className="images">
 			{images.map(image => 
@@ -14,6 +16,7 @@ function List(props) {
 					id={image.id}
 					key={image.id}
 					src={image.src}
+					tooltip={image.tooltip}
 					onDelete={props.onDelete}
 				/>)
 			}

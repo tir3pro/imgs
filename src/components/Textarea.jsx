@@ -36,7 +36,7 @@ class Textarea extends React.Component {
 			    	!this.state.isErrorMessageShown ? '' 
 			    	: 
 				    <div className="alert alert-danger">
-						<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+						<strong>Add tooltip text, please</strong>
 					</div>
 				} 
 			</div>

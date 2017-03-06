@@ -62,30 +62,20 @@ class CreateEditImage extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		
 		let src = this._choseImage();
 		let isImageAdded = this.state.isImageAdded;
+		let tooltip;
 		
 		if (isImageAdded && !this.state.isTooltipFormShown) {
 			this.props.onAdd(src);
-		} else if (isImageAdded && this.state.isTooltipFormShown) {
-
-		} else {
-			this.setState({
-				isImageAdded: false
-			});
+		} else if (isImageAdded && this.state.isTooltipFormShown && !this.state.errors && this.state.errors !== null) {
+			tooltip = this.state.tooltip;
+			this.props.onAdd(src, tooltip);
 		}
-
-		// if (this.state.errors === null) {
-		// 	this.setState({errors: true});
-		// }
-
-		/*adding tooltip*/
-		let tooltipSettings = this.state.tooltip;
-		this.props.addTooltip(tooltipSettings);
 	}
 
 	handleErrors(data) {
-		console.log('data: ', data);
 		this.setState({
 			errors: data
 		});
@@ -110,7 +100,7 @@ class CreateEditImage extends React.Component {
 						{
 							isImageAdded || isImageAdded === null ? '' :
 							<div className="alert alert-danger">
-								<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+								<strong>Add the image, please</strong>
 							</div>
 						}
 						{
@@ -124,12 +114,10 @@ class CreateEditImage extends React.Component {
 						!this.state.isTooltipFormShown ? '' : 
 							<TooltipForm onUpdateForm={this.handleTooltipForm} checkErrors={this.handleErrors} />
 					}
-
+					
 					<div className="submit-btn">
 						<button type="submit" className="btn btn-success">Create</button>
 					</div>
-
-					{ this.props.tooltips.length ? <Tooltip /> : null }
 				</form>
 			</div>
 		);

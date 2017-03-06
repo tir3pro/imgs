@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 
 import Button from './Button';
+import Tooltip from './Tooltip';
 import images from '../store/store';
 
 class Image extends React.Component {
@@ -30,6 +31,7 @@ class Image extends React.Component {
 					<Button className="button edit" onClick={this.handleEdit}>EDIT</Button>
 				</Link>
 				<Button className="button remove" onClick={() => this.props.onDelete(this.props.id)}>REMOVE</Button>
+				{ this.props.tooltip && this.props.tooltip.x ? <Tooltip coordX={this.props.tooltip.x} coordY={this.props.tooltip.y} text={this.props.tooltip.text} /> : null }
 			</div>
 		)
 	}

@@ -94,6 +94,32 @@ $fontFamily: monospace;
 	z-index: 30;
 }
 
+.tooltip {
+    opacity: 1;
+    z-index: 25px;
+
+    a {
+    	display: block;
+    	background: red;
+    	border-radius: 15px;
+    	width: 30px;
+    	height: 30px;
+	    text-align: center;
+	    font-weight: 600;
+	    color: red;
+	    border: 1px solid #bbb;
+	    background: #fff;
+	    font-size: 18px;
+	    font-family: monospace;
+	    line-height: 28px;
+	    text-decoration: none;
+    }
+
+    .tooltip__text {
+    	display: none;
+    }
+}
+
 button.close {
 	font-size: 45px;
 	margin-right: 8px;
