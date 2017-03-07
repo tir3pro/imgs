@@ -1,0 +1,176 @@
+$fontFamily: monospace;
+$border: '1px solid #bbb';
+
+.images {
+	padding: 20px;
+}
+
+.images__image-wrap {
+	position: relative;
+	max-width: 500px;
+	margin: 0 auto;
+	margin-top: 10px;
+
+	img {
+		width: 100%;
+	}
+
+	p {
+		text-transform: uppercase;
+		font-weight: 600;
+	    font-family: $fontFamily;
+	}
+
+	.button {
+		opacity: 0;
+		-webkit-transition: all 0.5s;
+     	-moz-transition: all 0.5s;
+     	-o-transition: all 0.5s;
+     	transition: all 0.5s;
+		position: absolute;
+		bottom: 20px;
+	    min-width: 75px;
+	    padding: 5px 10px;
+	    border: $border;
+	    text-align: center;
+	    color: #000;
+	    font-weight: 600;
+	    font-family: $fontFamily;
+	    cursor: pointer;
+		
+		&.edit {
+			right: 125px;
+		}
+		&.remove {
+			right: 35px
+		}
+	}
+
+	&:hover {
+		.button {
+			opacity: 1;
+		}
+	}
+
+	.tooltip {
+	    opacity: 1;
+	    z-index: 25;
+
+	    a {
+	    	display: block;
+	    	background: red;
+	    	border-radius: 15px;
+	    	width: 30px;
+	    	height: 30px;
+		    text-align: center;
+		    font-weight: 600;
+		    color: red;
+		    border: $border;
+		    background: #fff;
+		    font-size: 18px;
+		    font-family: $fontFamily;
+		    line-height: 28px;
+		    text-decoration: none;
+	    }
+
+	    .tooltip__text {
+			display: none;
+
+			&:before {
+				content: '';
+			    display: block;
+			    width: 0;
+			    height: 0;
+			    position: absolute;
+			    left: 6px;
+			    top: -8px;
+			    border-left: 8px solid transparent;
+			    border-right: 8px solid transparent;
+			    border-bottom: 8px solid #fff;
+			}    	
+	    }
+
+	    &:hover {
+		    .tooltip__text {
+		    	display: block;
+		    	color: #000;
+			    background: #fff;
+			    position: absolute;
+			    top: 40px;
+			    left: 0;
+			    padding: 5px;
+		        min-width: 100px;
+    			border: $border;
+    			border-radius: 3px;
+		    }
+	    }
+	}
+}
+
+.create-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 50px;
+    color: #fff;
+    background-color: #5c5;
+    border: 2px solid #245024;
+    border-radius: 40px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 20;
+}
+
+.image-adding__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    z-index: 25;
+}
+
+.image-adding__tooltip-form {
+	position: fixed;
+	width: 500px;
+	min-height: 500px;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -250px;
+	background: #fff;
+	border: $border;
+	z-index: 30;
+	padding: 15px;
+	
+	.alert-danger {
+		margin-top: 10px;
+	}
+
+	button.close {
+		font-size: 45px;
+    	margin-right: -7px;
+    	margin-top: -15px;
+	}
+}
+
+.visible {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .image-adding__tooltip-form {
+    	max-width: 100%;
+    	margin-left: 0;
+    	left: initial;
+    }
+}
