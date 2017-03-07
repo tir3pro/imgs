@@ -13,18 +13,18 @@ class TooltipForm extends React.Component {
 					coordinate="x"
 					onCheck={this.props.onUpdateForm.bind(null, 'x')}
 					error={this.props.errors.coordinate}
-				  value={this.props.tooltip.x}
+				  	value={this.props.tooltip.x}
 				/>
-        <Coordinate
-          coordinate="y"
-          onCheck={this.props.onUpdateForm.bind(null, 'y')}
-          error={this.props.errors.coordinate}
-          value={this.props.tooltip.y}
-        />
+		        <Coordinate
+			        coordinate="y"
+			        onCheck={this.props.onUpdateForm.bind(null, 'y')}
+			        error={this.props.errors.coordinate}
+			        value={this.props.tooltip.y}
+		        />
 				<Textarea
 					onCheck={this.props.onUpdateForm.bind(null, 'text')}
 					error={this.props.errors.text}
-				  value={this.props.tooltip.text}
+				  	value={this.props.tooltip.text}
 				/>
 			</div>
 		);

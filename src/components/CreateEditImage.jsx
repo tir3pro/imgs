@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 import Button from './Button';
 import Checkbox from './Checkbox';
 import TooltipForm from './TooltipForm';
+import { browserHistory } from 'react-router';
+
 
 // Validation collection
 import validation from '../validation';
@@ -12,8 +14,6 @@ import validation from '../validation';
 class CreateEditImage extends React.Component {
 	constructor(props) {
 		super(props);
-		
-		console.log(this.props);
 
 		this.state = {
 			openedForm: this.props.params.state,
@@ -22,11 +22,11 @@ class CreateEditImage extends React.Component {
 			errors: {},
 			tooltip: this.props.params.state === 'edit' ?
 				this.props.images[Number(this.props.params.id) - 1].tooltip :
-	        	{
-		          	x: 0,
-		          	y: 0,
-		          	text: ''
-	        	}
+				{
+					x: 0,
+					y: 0,
+					text: ''
+				}
 		};
 
 		this.toggleTooltip = this.toggleTooltip.bind(this);
@@ -39,8 +39,8 @@ class CreateEditImage extends React.Component {
 	_choseImage() {
 		var randomNumberBetweenZeroAndFour = (function (min, max) {
 			min = Math.ceil(min);
-		  	max = Math.floor(max);
-		  	return Math.floor(Math.random() * (max - min + 1)) + min;
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
 		})(0, 3);
 		
 		return this.props.images[randomNumberBetweenZeroAndFour].src;
@@ -54,14 +54,14 @@ class CreateEditImage extends React.Component {
 
 	handleTooltipForm(prop, event) {
 		const result = prop !== 'text' ? {
-      		[prop]: Number(event.target.value)
-    		} : { [prop]: event.target.value };
+			[prop]: Number(event.target.value)
+			} : { [prop]: event.target.value };
 
-		this.setState({
-			tooltip: Object.assign(
-				{},
-				this.state.tooltip,
-        result
+			this.setState({
+				tooltip: Object.assign(
+					{},
+					this.state.tooltip,
+					result
 			)
 		});
 	}
@@ -72,39 +72,50 @@ class CreateEditImage extends React.Component {
 		});
 	}
 
+	requireAuth(nextState, replaceState) {
+		replaceState({ nextPathname: nextState.location.pathname }, '/')
+	}
+
 	handleErrors (event) {
-	    event.preventDefault();
+		event.preventDefault();
 
-	    const isImageEmpty = this.state.isImageAdded === false;
-	    const areCoordinatesEmpty = this.state.tooltip.x === 0 || this.state.tooltip.y === 0;
-	    const isTextEmpty = this.state.tooltip.text.trim() === '';
+		const isImageEmpty = this.state.isImageAdded === false;
+		const areCoordinatesEmpty = this.state.tooltip.x === 0 || this.state.tooltip.y === 0;
+		const isTextEmpty = this.state.tooltip.text.trim() === '';
 
-	    const errors = {};
+		const errors = {};
 
-	    if (isImageEmpty) {
-	      	errors.image = validation('image');
-	    }
+		if (isImageEmpty) {
+			errors.image = validation('image');
+		}
 
-	    if (areCoordinatesEmpty) {
-	      	errors.coordinate = validation('coordinate');
-	    }
+		if (areCoordinatesEmpty) {
+			errors.coordinate = validation('coordinate');
+		}
 
-	    if (isTextEmpty) {
-	      	errors.text = validation('description');
-	    }
+		if (isTextEmpty) {
+			errors.text = validation('description');
+		}
 
-	    return errors;
+		return errors;
 	}
 
 	handleSubmit(event) {
 		const errors = this.handleErrors(event);
+
 		if (Object.keys(errors).length) {
-      		this.setState({
-        		errors
-      		});
-	    } else {
-			this.props.onAdd(this._choseImage(), this.state.tooltip);
-		}
+			this.setState({
+				errors
+			});
+		} else {
+			if (this.state.openedForm === 'edit') {
+				this.props.onAdd(this._choseImage(), this.state.tooltip, this.props.params.id);
+			} else {
+				this.props.onAdd(this._choseImage(), this.state.tooltip);
+			}	
+		}	
+
+		browserHistory.push('/');
 	}
 
 	render() {
@@ -117,7 +128,7 @@ class CreateEditImage extends React.Component {
 				<form className="form-group image-adding__tooltip-form" onSubmit={this.handleSubmit}>
 					<Link to="/">
 						<button type="button" className="close" aria-label="Close">
-	  						<span aria-hidden="true">&times;</span>
+							<span aria-hidden="true">&times;</span>
 						</button>
 					</Link>
 
@@ -125,13 +136,13 @@ class CreateEditImage extends React.Component {
 						<p>Please add a new image</p>
 						<button type="button" className="btn btn-primary" onClick={this.handleAddImage} >Add image</button>
 						{
-              				isImageInvalid ?
+							isImageInvalid ?
 							<div className="alert alert-danger">
 								<strong>{ imageValidationObject.message }</strong>
 							</div> : null
 						}
 						{
-              				isImageInvalid ? <p className="add-image__added">Image added!</p> : null
+							isImageInvalid ? <p className="add-image__added">Image added!</p> : null
 						}
 					</div>
 

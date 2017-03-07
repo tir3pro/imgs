@@ -6,8 +6,6 @@ import Image from './Image';
 function List(props) {
 	const images = props.images;
 
-	console.log(images)
-
 	return (
 		<div className="images">
 			{images.map(image => 

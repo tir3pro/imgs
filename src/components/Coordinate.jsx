@@ -12,11 +12,11 @@ class Coordinate extends React.Component {
 				  value={this.props.value}
 				/>
         {
-          this.props.error ?
-						<div className="alert alert-danger">
-							<strong>{ this.props.error.message }</strong>
-						</div> :
-            null
+          	this.props.error ?
+				<div className="alert alert-danger">
+					<strong>{ this.props.error.message }</strong>
+				</div> :
+			null
         }
 			</div>
 		);

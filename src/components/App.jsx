@@ -29,8 +29,17 @@ class App extends React.Component {
 		this.setState({ images });
 	}
 
-	handleAddImage(src, tooltip) {
-		let id = this.nextId();
+	handleAddImage(src, tooltip, imageId) {
+		let id = imageId ? imageId : this.nextId();
+		let isEdited = null;
+		let images;
+		
+		this.state.images.forEach((image, i) => {
+			if (image.id === id) {
+				isEdited = i;
+			}
+		});
+
 		let image = {
 			id,
 			title: `Image ${id}`,
@@ -38,8 +47,14 @@ class App extends React.Component {
 			tooltip
 		};
 
-		let images = [...this.state.images, image];
+		if (isEdited !== null && isEdited + 1) {
+			this.state.images[isEdited] = image;
+			images = this.state.images;
 
+		} else {
+			images = [...this.state.images, image];
+		}
+		
 		this.setState({ images });
 	}
 

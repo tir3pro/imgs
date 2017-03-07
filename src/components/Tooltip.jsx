@@ -2,20 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Tooltip extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	tooltipToggle() {
-		$('[data-toggle="tooltip"]').tooltip();   	
-	}
-
 	render() {
 		return (
 			<div className="tooltip" 
 				style={{ left: `${this.props.coordX < 25 ? this.props.coordX + (25 - this.props.coordX) : this.props.coordX}px`, 
-						top: `${this.props.coordY < 40 ? this.props.coordY + (40 - this.props.coordY) : 40 - this.props.coordY}px` }}>
-				<a 	href="#" data-toggle="tooltip" data-placement="top" title={this.props.text} onMouseOver={this.tooltipToggle} >?</a>
+						top: `${this.props.coordY < 40 ? this.props.coordY + (40 - this.props.coordY) : this.props.coordY}px` }}>
+				<a 	href="#">?</a>
+				<p className="tooltip__text">{this.props.text}</p>
 			</div>
 		);
 	}
